@@ -5,7 +5,6 @@ exports.getAllTours = async (req, res) => {
     const tours = await Tour.find();
     res.status(200).json({
       status: 'success',
-      requestedAt: req.requestTime,
       results: tours.length,
       data: { tours }
     });
@@ -22,7 +21,6 @@ exports.getTour = async (req, res) => {
     const tour = await Tour.findById(req.params.id);
     res.status(200).json({
       status: 'success',
-      requestedAt: req.requestTime,
       data: { tour }
     });
   } catch (err) {
@@ -38,7 +36,6 @@ exports.createTour = async (req, res) => {
     const newTour = await Tour.create(req.body);
     res.status(201).json({
       status: 'success',
-      requestedAt: req.requestTime,
       data: {
         tour: newTour
       }
@@ -59,7 +56,6 @@ exports.updateTour = async (req, res) => {
     });
     res.status(200).json({
       status: 'success',
-      requestedAt: req.requestTime,
       data: { tour }
     });
   } catch (err) {
@@ -75,7 +71,6 @@ exports.deleteTour = async (req, res) => {
     await Tour.findByIdAndDelete(req.params.id);
     res.status(204).json({
       status: 'success',
-      requestedAt: req.requestTime,
       data: null
     });
   } catch (err) {
