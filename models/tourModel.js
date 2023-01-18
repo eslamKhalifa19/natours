@@ -23,7 +23,6 @@ const tourSchema = new mongoose.Schema(
     difficulty: {
       type: String,
       required: [true, 'A tour must have a difficulty'],
-      trim: true,
       enum: {
         values: ['easy', 'medium', 'difficult'],
         message: 'Difficulty is either easy , medium , difficult'
@@ -63,8 +62,7 @@ const tourSchema = new mongoose.Schema(
     },
     imageCover: {
       type: String,
-      required: [true, 'A tour must have a cover image'],
-      trim: true
+      required: [true, 'A tour must have a cover image']
     },
     images: [String],
     createdAt: {
