@@ -1,4 +1,4 @@
-const AppError = require('../utils/appError');
+const AppError = require('./../utils/appError');
 const Tour = require('./../models/tourModel');
 const catchAsync = require('./../utils/catchAsync');
 const factory = require('./handlerFactory');
@@ -73,8 +73,12 @@ exports.getMonthlyPlan = catchAsync(async (req, res, next) => {
         _id: 0
       }
     },
-    { $sort: { numTourStarts: -1 } },
-    { $limit: 12 }
+    {
+      $sort: { numTourStarts: -1 }
+    },
+    {
+      $limit: 12
+    }
   ]);
   res.status(200).json({
     status: 'success',
@@ -124,7 +128,7 @@ exports.getDistances = catchAsync(async (req, res, next) => {
     {
       $geoNear: {
         near: {
-          type: 'point',
+          type: 'Point',
           coordinates: [lng * 1, lat * 1]
         },
         distanceField: 'distance',

@@ -17,12 +17,12 @@ const reviewSchema = new mongoose.Schema(
       default: Date.now
     },
     tour: {
-      type: mongoose.Schema.objectId,
+      type: mongoose.Schema.ObjectId,
       ref: 'Tour',
       required: [true, 'Review must belong to a tour']
     },
     user: {
-      type: mongoose.Schema.objectId,
+      type: mongoose.Schema.ObjectId,
       ref: 'User',
       required: [true, 'Review must belong to a user']
     }
@@ -78,7 +78,7 @@ reviewSchema.pre(/^findOneAnd/, async function(next) {
   next();
 });
 
-reviewSchema.post(/^findOneAnd/, async function(next) {
+reviewSchema.post(/^findOneAnd/, async function() {
   await this.r.constructor.calcAverageRatings(this.r.tour);
 });
 
