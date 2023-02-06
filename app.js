@@ -53,7 +53,10 @@ app.use(
 );
 
 app.get('/', (req, res) => {
-  res.status(200).render('base');
+  res.status(200).render('base', {
+    tour: 'The Forest Hiker',
+    user: 'Jonas'
+  });
 });
 app.use('/api/v1/tours', tourRouter);
 app.use('/api/v1/users', userRouter);
