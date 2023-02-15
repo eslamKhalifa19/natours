@@ -6,6 +6,9 @@ const helmet = require('helmet');
 const mongoSanitize = require('express-mongo-sanitize');
 const xss = require('xss-clean');
 const hpp = require('hpp');
+const cookieParser = require('cookie-parser');
+const cors = require('cors');
+
 const AppError = require('./utils/appError');
 const globalErrorHandler = require('./controllers/errorController');
 const tourRouter = require('./routes/tourRoutes');
@@ -35,6 +38,10 @@ const limiter = rateLimit({
 app.use('/api', limiter);
 
 app.use(express.json({ limit: '10kb' }));
+app.use(express.urlencoded({ extended: true, limit: '10kb' }));
+app.use(cookieParser());
+
+app.use(cors({ origin: 'http:127.0.0.1:3000', credentials: true }));
 
 app.use(mongoSanitize());
 
@@ -52,6 +59,7 @@ app.use(
     ]
   })
 );
+
 app.use('/', viewRouter);
 app.use('/api/v1/tours', tourRouter);
 app.use('/api/v1/users', userRouter);
